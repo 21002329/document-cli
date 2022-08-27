@@ -3,10 +3,11 @@ package de.europace.documentcli.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.europace.documentcli.client.model.Document;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +26,10 @@ public class SerDes {
    * @return de-serialized list
    */
   public static <T> List<T> deserialize(String json, TypeReference<List<T>> typeReference) {
-    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = JsonMapper.builder()
+        .addModule(new Jdk8Module())
+        .addModule(new JavaTimeModule())
+        .build();
     try {
       return objectMapper.readValue(json, typeReference);
     } catch (JsonProcessingException e) {

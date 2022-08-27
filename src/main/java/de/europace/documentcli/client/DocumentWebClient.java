@@ -1,19 +1,12 @@
 package de.europace.documentcli.client;
 
-import de.europace.documentcli.client.model.Document;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClient.RequestHeadersUriSpec;
-import org.springframework.web.reactive.function.client.WebClient.UriSpec;
-import reactor.core.publisher.Mono;
 
-import javax.print.Doc;
 import java.util.Collections;
-import java.util.List;
 
 @Service
 @Slf4j

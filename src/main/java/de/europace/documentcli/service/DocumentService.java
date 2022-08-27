@@ -2,7 +2,7 @@ package de.europace.documentcli.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import de.europace.documentcli.client.DocumentWebClient;
-import de.europace.documentcli.client.model.Document;
+import de.europace.documentcli.domain.Document;
 import de.europace.documentcli.util.SerDes;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
