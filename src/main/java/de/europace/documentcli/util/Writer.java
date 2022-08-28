@@ -19,7 +19,7 @@ public class Writer {
 
   public static String writeDocumentsWithAggregate(
       List<Document> documents, DocumentAggregate aggregate) {
-    String out = "# documents: %d, # deleted documents: %d, # total size: %d, # avg. size: %.2f";
+    String out = "# documents: %d, # deleted documents: %d, total size: %d, avg. size: %.2f";
 
     return writeDocuments(documents) + "\n\n" + String.format(out,
         aggregate.getTotalNumber(),
