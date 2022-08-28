@@ -6,19 +6,12 @@ A simple command line interface for [Document Test API](https://github.com/europ
 1. Clone this repository
 2. Configure base URI for Document Test API  
 see `client.documentApiBaseUrl` in `application.properties`  
-3. Create executable and run
-   1. With [Docker](https://www.docker.com/products/docker-desktop/)
-      2. Build Docker image  
-      `docker build -t europace/document-cli .`
-      3. Run the Docker image  
-      `docker run -it europace/document-cli`
-   2. With Gradle (requires Java 11)
-      1. Build JAR  
-      `./gradlew bootJar`
-      2. Run  
-      `java -jar build/libs/app.jar`
+3. Build [Docker](https://www.docker.com/products/docker-desktop/) image  
+`docker build -t europace/document-cli .`
+4. Run the Docker image  
+`docker run -it europace/document-cli`
 
-You should see the Spring Shell prompt after running  
+Spring Shell prompt appears on successful startup  
 `shell:>`
 
 ### Running unit tests
