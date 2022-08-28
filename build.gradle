@@ -42,3 +42,8 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	version = ""
+	baseName 'app'
+}

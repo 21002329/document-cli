@@ -21,7 +21,8 @@ public class Commands {
   @ShellMethod(value = "Show list of documents, filtered by category and/or sorted")
   public String show(
       @ShellOption(defaultValue = "", value = { "--category","-c" }) String category,
-      @ShellOption(defaultValue = "", value = { "--sortBy","-s" }) String sortBy
+      @ShellOption(defaultValue = "", value = { "--sortBy","-s" }) String sortBy,
+      @ShellOption(value = { "--showAggregate", "-a" }) Boolean showAggregate
   ) {
     List<Document> documents;
     if (!category.isEmpty()) {
@@ -30,6 +31,11 @@ public class Commands {
       documents = documentService.getAllDocuments(sortBy);
     }
 
-    return Writer.writeDocuments(documents);
+    if (showAggregate) {
+      return Writer.writeDocumentsWithAggregate(documents,
+          documentService.aggregate(documents));
+    } else {
+      return Writer.writeDocuments(documents);
+    }
   }
 }

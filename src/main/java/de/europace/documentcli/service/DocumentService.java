@@ -3,6 +3,7 @@ package de.europace.documentcli.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import de.europace.documentcli.client.DocumentWebClient;
 import de.europace.documentcli.domain.Document;
+import de.europace.documentcli.domain.DocumentAggregate;
 import de.europace.documentcli.util.SerDes;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,33 @@ public class DocumentService {
     return sorted(getDocuments().stream()
         .filter(documentHasCategory)
         .collect(Collectors.toList()), sortBy);
+  }
+
+  /**
+   * Returns aggregated values for provided list of documents.
+   *
+   * @param documents list of documents to be used for aggregation
+   * @return aggregated values
+   */
+  public DocumentAggregate aggregate(List<Document> documents) {
+    DocumentAggregate da = new DocumentAggregate();
+
+    da.setTotalNumber((long) documents.size());
+
+    da.setAvgSize(documents.stream()
+        .mapToLong(Document::getSize)
+        .average()
+        .orElse(0.0));
+
+    da.setTotalSize(documents.stream()
+        .mapToLong(Document::getSize)
+        .sum());
+
+    da.setTotalNumberDeleted(documents.stream()
+        .filter(Document::getDeleted)
+        .count());
+
+    return da;
   }
 
   private List<Document> getDocuments() {
