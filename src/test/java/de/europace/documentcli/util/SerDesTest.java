@@ -4,7 +4,7 @@ package de.europace.documentcli.util;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import de.europace.documentcli.client.model.Document;
+import de.europace.documentcli.domain.Document;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
