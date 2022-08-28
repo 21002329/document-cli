@@ -10,7 +10,6 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ShellComponent
 @AllArgsConstructor
@@ -19,8 +18,18 @@ public class Commands {
 
   private final DocumentService documentService;
 
-  @ShellMethod(value = "Show list of available documents")
-  public String show() {
-    return Writer.writeDocuments(documentService.getDocuments());
+  @ShellMethod(value = "Show list of documents, filtered by category and/or sorted")
+  public String show(
+      @ShellOption(defaultValue = "", value = { "--category","-c" }) String category,
+      @ShellOption(defaultValue = "", value = { "--sortBy","-s" }) String sortBy
+  ) {
+    List<Document> documents;
+    if (!category.isEmpty()) {
+      documents = documentService.getDocumentsByCategory(category, sortBy);
+    } else {
+      documents = documentService.getAllDocuments(sortBy);
+    }
+
+    return Writer.writeDocuments(documents);
   }
 }
